@@ -1,113 +1,52 @@
-# Stop Slop
+# Krumpy Writing
 
-Stop Slop edits AI-assisted drafts that sound polished but generic. It cuts canned wording and repeated sentence shapes while keeping the draft's facts, uncertainty, technical terms, and useful voice.
+An explicitly invoked Codex writing skill for documents, proposals, explanations and correspondence. It combines anti-slop editing with Krumpy's practical, mechanism-led writing style: explain the problem, work through the proposal, retain the tradeoffs, and be honest about what remains undecided.
 
-[Try the browser workbench](https://odinfree.github.io/stop-slop-refined/) or [read the skill](SKILL.md).
+This is a fork of [odinfree/stop-slop-refined](https://github.com/odinfree/stop-slop-refined). Its anti-slop checks are the starting point. The personal voice guide is grounded mainly in two user-supplied writing samples, with a professional default and a more candid register when requested.
 
-## Use it for
+## Use
 
-- emails, memos, and leadership updates
-- posts, launch copy, and website text
-- documentation and research notes
-- a detect-only review before publication
-
-## What it does
-
-- `rewrite` returns clean prose first. It keeps diagnosis backstage unless the user asks for it.
-- `detect` quotes the problem, explains the reader consequence, and suggests the smallest repair.
-- It keeps claims inside the attached sources and preserves qualifications and necessary technical language.
-- Before line edits, it checks whether AI chose the claim, outline, and first example. If it did, the editor rebuilds from the human point.
-- The final pass catches overused AI wording, paste debris, formulaic structure, and fake-casual social copy.
-
-The browser workbench is an editing aid. It does not identify who wrote the text.
-
-## Quick use
-
-Rewrite a draft:
+Invoke it by name for the artifact you want to write:
 
 ```text
-Rewrite this with Stop Slop. Preserve every supported claim and qualification. Return the clean draft first.
+Use $krumpy-writing to rewrite this proposal in my voice. Preserve its facts and open questions.
+
+Use $krumpy-writing to draft documentation from these notes for a first-time reader.
+
+Use $krumpy-writing to review this document. Flag issues without rewriting it.
+
+Use $krumpy-writing for a candid discussion note based on these points.
+
+Use $krumpy-writing for clarity only; keep the original author's voice.
 ```
 
-Audit without rewriting:
+It is disabled for implicit invocation through `agents/openai.yaml`. It does not govern general chat, coding, commands or operational updates. Naming it applies it to the requested writing and its revisions, not every later task. It needs no external services, private source files or API keys to edit text.
 
-```text
-Run Stop Slop in detect mode. Quote each problem, explain the reader consequence, and give the smallest repair.
-```
+## Install locally
 
-## Install
-
-### Claude Code
+With the Codex skill-installer, install repository `KrumpyLumpkins/stop-slop-refined`, path `.`, under the name `krumpy-writing`. For a reproducible installation, specify a reviewed commit using `--ref`:
 
 ```bash
-mkdir -p ~/.claude/skills
-git clone https://github.com/odinfree/stop-slop-refined.git ~/.claude/skills/stop-slop
+python3 "$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
+  --repo KrumpyLumpkins/stop-slop-refined --path . --name krumpy-writing
 ```
 
-### Codex
+Use your actual Codex home if the environment variable is unset. The installer refuses to overwrite an existing skill. Review and back up an existing local version before updating it. The skill should be available on the next turn; reopen the app if discovery has not refreshed. Installation applies to that local Codex home across projects and projectless tasks; other hosts require their own installation.
 
-```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/odinfree/stop-slop-refined.git ~/.codex/skills/stop-slop
-```
+## What changed from upstream
 
-### ChatGPT or Claude projects
+- Explicit-only invocation and a human-facing artifact boundary.
+- A personal voice profile grounded in user-authored samples, with provenance and confidence limits.
+- Contextual checks in place of word, punctuation, passive-voice and three-item-list bans.
+- Draft, rewrite and review modes; reader-comprehension and semantic-fidelity checks.
+- Protection for formulas, identifiers, evidence, uncertainty and unresolved decisions.
+- Original examples across domains and behavioural evaluation cases.
+- Optional revision records rather than compulsory HTML artifacts.
 
-Attach the full package to the project. If the platform accepts only selected files, start with `SKILL.md` and add the references it names as needed.
+Read [SKILL.md](SKILL.md), the [voice profile](references/voice.md), [examples](references/examples.md), and [source decisions](references/sources.md). Private source documents and chat extracts are not distributed.
 
-### Update an existing clone
+## Repository maintenance
 
-```bash
-git -C ~/.claude/skills/stop-slop pull --ff-only
-git -C ~/.codex/skills/stop-slop pull --ff-only
-```
+The inherited browser workbench in `docs/` is a catalogue viewer, not the Codex skill or a voice-matching evaluator. The optional revision builder is retained. After changing catalogue files, regenerate its data with `node scripts/generate-site-data.mjs`. No hosted deployment is needed to use the skill.
 
-## Editing order
-
-1. Protect facts, uncertainty, and source limits.
-2. Check who chose the first creative shape.
-3. Fix the argument and sentence structure.
-4. Apply the plain-writing baseline.
-5. Remove formulaic wording, patterns, and formatting debris.
-6. Read the result again as a first-time reader.
-
-## Reference files
-
-| File | Open it when you need |
-|---|---|
-| [`references/words.md`](references/words.md) | word tiers, phrase bans, and replacements |
-| [`references/patterns.md`](references/patterns.md) | sentence, structure, voice, and formatting checks |
-| [`references/examples.md`](references/examples.md) | before-and-after examples and 14 regression cases |
-| [`references/ai-role-and-reader-fit.md`](references/ai-role-and-reader-fit.md) | anti-anchoring, source boundaries, and reader fit |
-| [`references/revision-artifact.md`](references/revision-artifact.md) | the trigger and data format for an inspectable second-pass diff |
-
-Personal and team voice profiles stay outside this public package. Add a local voice overlay when a writer needs one.
-
-## Revision artifact
-
-A substantive second pass can produce an HTML file with the first draft, final draft, and sentence-level changes. Read the [artifact workflow](references/revision-artifact.md), then run:
-
-```bash
-node scripts/build_revision_artifact.mjs \
-  --data /path/to/revision-data.json \
-  --output /tmp/stop-slop-revision.html
-```
-
-## Development
-
-Regenerate the browser data after changing the word or pattern references:
-
-```bash
-node scripts/generate-site-data.mjs
-git diff --exit-code -- docs/site-data.js
-node --check docs/app.js
-node --check scripts/generate-site-data.mjs
-```
-
-Serve `docs/` with any static file server.
-
-Current public release: 3.1.1. See [CHANGELOG.md](CHANGELOG.md) for release notes.
-
-## Attribution and license
-
-See [ATTRIBUTION.md](ATTRIBUTION.md) for the source and license boundaries. This repository is MIT licensed. Attribution does not change the license of a source that has no license of its own.
+For changes to the skill, run Codex's `quick_validate.py` against the repository and review [evals/cases.md](evals/cases.md). Mechanical validation confirms packaging, not writing quality or a user's preference. See [ATTRIBUTION.md](ATTRIBUTION.md) and [LICENSE](LICENSE) for source notices.

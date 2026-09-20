@@ -1,0 +1,6 @@
+interface:
+  display_name: "Krumpy Writing"
+  short_description: "Human-facing writing in Krumpy's voice, on request"
+  default_prompt: "Use $krumpy-writing to rewrite this document in my voice, preserving its facts, caveats and intended audience."
+policy:
+  allow_implicit_invocation: false

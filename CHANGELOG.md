@@ -1,3 +1,9 @@
+# Krumpy Writing 1.0.0 — 2026-09-20
+
+Forked from odinfree/stop-slop-refined at `1d384cd0b6577ce5ad15297c8e867334e0ba1af1`. Added explicit-only Codex invocation, a grounded personal voice profile, contextual editing, source-fidelity and reader checks, original examples, and behavioural cases. Preserved MIT provenance and optional revision tooling. Replaced inherited house bans and mandatory artifact generation.
+
+---
+
 # Changelog
 
 ## 3.1.1 - 2026-08-28

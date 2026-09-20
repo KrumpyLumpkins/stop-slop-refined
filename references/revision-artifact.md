@@ -1,19 +1,12 @@
 # Stop Slop - Revision Artifact
 
-Create an inspectable HTML diff when the second Stop Slop pass makes substantive sentence changes.
+Optionally create an inspectable HTML diff for a writing revision.
 
 This workflow adapts the revision-record idea from Shreya Shankar's Plain Writing skill. The implementation uses [revision_template.html](../assets/revision_template.html).
 
 ## Trigger
 
-Create the artifact when any condition applies:
-
-- the second pass rewrites or removes three or more sentences
-- one changed sentence carries a decision, factual boundary, qualification, or central claim
-- the user asks to inspect the diff
-- the document has a high review cost
-
-Skip it for spelling fixes, punctuation cleanup, or one small rewrite with no change in meaning.
+Use only when the user requests a diff or an inspectable record would help them review a substantial change. It is optional. Ordinary chat edits need no artifact. Preserve the requested output location; otherwise use a durable task output directory rather than a temporary path when the user needs the file.
 
 ## Sequence
 
@@ -23,7 +16,7 @@ Skip it for spelling fixes, punctuation cleanup, or one small rewrite with no ch
 4. Record every sentence as `keep`, `edit`, or `del`.
 5. Group the sentence records by paragraph.
 6. Save the records as JSON or pipe them to the local builder.
-7. Run `scripts/build_revision_artifact.mjs` and write the result to `/tmp/stop-slop-revision-<short-name>.html`.
+7. Run `scripts/build_revision_artifact.mjs` and write the result to the chosen task output path.
 8. Open the file once or inspect it in a browser, then give the user the absolute path.
 
 ## Builder

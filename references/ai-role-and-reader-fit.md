@@ -1,3 +1,5 @@
+> Historical upstream reference. Not part of the Krumpy Writing runtime workflow. SKILL.md governs: a human-written first draft and public review are not prerequisites. Read this only to study upstream design.
+
 # Stop Slop - AI Role and Reader Fit
 
 This file turns the Chen/Chan and Radivojevic papers into operational Stop Slop rules.

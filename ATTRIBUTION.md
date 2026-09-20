@@ -1,4 +1,16 @@
-# Attribution
+# Krumpy Writing attribution
+
+Fork of [odinfree/stop-slop-refined](https://github.com/odinfree/stop-slop-refined), based on commit `1d384cd0b6577ce5ad15297c8e867334e0ba1af1`, reviewed 20 September 2026. Its MIT licence and inherited attribution are retained below. New personal guidance, catalogue wording and examples were developed for KrumpyLumpkins. Private source documents are not included or relicensed.
+
+Additional conceptual references, expressed in new wording:
+
+- [Anthropic doc-coauthoring](https://github.com/anthropics/skills/blob/main/skills/doc-coauthoring/SKILL.md): reader purpose and comprehension checks. No implementation text copied; per-skill licence was not conclusively established in this review.
+- [obra/the-elements-of-style](https://github.com/obra/the-elements-of-style/blob/main/skills/writing-clearly-and-concisely/SKILL.md): concrete language, paragraph focus and connected ideas. No modern packaging or book text copied.
+
+Related MIT notices observed: hardikpandya/stop-slop, Copyright (c) 2025 Hardik Pandya; blader/humanizer, Copyright (c) 2025 Siqi Chen. This fork retains the upstream notice and independently expresses new examples and instructions rather than copying additional source text.
+
+## Inherited upstream attribution
+
 
 This repository uses original wording written for public release. It excludes private voice systems and team-specific guidance.
 

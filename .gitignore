@@ -2,3 +2,10 @@
 .DS_Store
 .playwright-cli/
 output/
+
+# Private writing samples and local evaluation artifacts
+work/
+corpus/
+private/
+*.docx
+*.jsonl
